@@ -8,6 +8,7 @@ class TaskAdmin(admin.ModelAdmin):
         "id",
         "name",
         "description",
+        "user_id",
         "priority",
         "completed",
         "created_at"

@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -15,6 +16,15 @@ class Task(models.Model):
         choices=Priority.choices,
         default=Priority.MEDIUM
     )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.RESTRICT,
+        limit_choices_to={"is_superuser": False},
+        related_name="tasks",
+        null=True,
+    )
     completed = models.BooleanField(default=False)
     created_at = models.DateField(auto_now_add=True)
-    #user
+
+    def __str__(self):
+        return self.name
